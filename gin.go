@@ -28,6 +28,7 @@ type (
 
 	// Represents the web framework, it wraps the blazing fast httprouter multiplexer and a list of global middlewares.
 	Engine struct {
+		Config         *Config
 		*RouterGroup
 		HTMLRender     render.Render
 		Default404Body []byte
@@ -42,6 +43,7 @@ type (
 // The most basic configuration
 func New() *Engine {
 	engine := &Engine{}
+	engine.Config = NewConfig()
 	engine.RouterGroup = &RouterGroup{
 		Handlers:     nil,
 		absolutePath: "/",
